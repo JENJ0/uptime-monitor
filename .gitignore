@@ -1,4 +1,4 @@
 .vscode/
 .claude/
-.github/
-.docs/
+.github/agents/portfolio-mentor.agent.md
+docs/
