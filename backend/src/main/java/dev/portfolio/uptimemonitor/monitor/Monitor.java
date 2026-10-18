@@ -20,8 +20,7 @@ public class Monitor {
     private int expectedStatus;
     private Instant createdAt;
 
-    protected Monitor() {
-    }
+    protected Monitor() {}
 
     public Monitor(String name, String url, int intervalSeconds, int timeoutMs, int expectedStatus) {
         this.name = name;
