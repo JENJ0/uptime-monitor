@@ -8,6 +8,7 @@ import org.springframework.http.ProblemDetail;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.validation.FieldError;
+import dev.portfolio.uptimemonitor.monitor.MonitorNotFoundException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -18,6 +19,12 @@ public class ApiExceptionHandler {
         Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()
             .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage,(first, second) -> first));
         problem.setProperty("errors", errors);
+        return problem;
+    }
+
+    @ExceptionHandler(MonitorNotFoundException.class)
+    public ProblemDetail handleMonitorNotFound(MonitorNotFoundException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         return problem;
     }
 }
