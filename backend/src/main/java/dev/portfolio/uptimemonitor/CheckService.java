@@ -25,6 +25,9 @@ public class CheckService {
        return runCheckAgainst(TARGET_URL);
     }
     public CheckResult runCheckAgainst(String targetUrl) {
+        return runCheckAgainst(targetUrl, EXPECTED_STATUS);
+    }
+    public CheckResult runCheckAgainst(String targetUrl, int expectedStatus) {
         Instant checkedAt = Instant.now();
         long startTime = System.nanoTime();
         int httpStatus;                             
@@ -46,7 +49,7 @@ public class CheckService {
             
         }
         long durationMs = (System.nanoTime() - startTime) / 1_000_000;
-        boolean successful = httpStatus == EXPECTED_STATUS;
+        boolean successful = httpStatus == expectedStatus;
         String errorType = successful ? null : "UNEXPECTED_STATUS";
 
         return new CheckResult(
