@@ -9,15 +9,11 @@ import org.springframework.context.annotation.Import;
 import dev.portfolio.uptimemonitor.TestcontainersConfiguration;
 import java.time.Instant;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.portfolio.uptimemonitor.CheckResult;
 
-
-
-
-@SpringBootTest
+@SpringBootTest(properties = "uptime.scheduler.enabled=false")
 @Import(TestcontainersConfiguration.class)
 class MonitorRepositoryTest {
     @Autowired private MonitorRepository monitorRepository;

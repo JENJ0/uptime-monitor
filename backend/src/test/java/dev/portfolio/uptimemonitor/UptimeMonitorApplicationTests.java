@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 
-@SpringBootTest
+@SpringBootTest(properties = "uptime.scheduler.enabled=false")
 @AutoConfigureMockMvc
 @Import(TestcontainersConfiguration.class)
 class UptimeMonitorApplicationTests {
@@ -25,7 +25,5 @@ class UptimeMonitorApplicationTests {
 				.andExpect(content().json(  
 					"{\"message\":\"Uptime Monitor API is ready\"}"
 				));
-
 	}
-
 }

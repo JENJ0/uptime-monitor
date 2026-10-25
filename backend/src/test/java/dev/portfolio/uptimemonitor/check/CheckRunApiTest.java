@@ -1,9 +1,7 @@
 package dev.portfolio.uptimemonitor.check;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.net.InetSocketAddress;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +11,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import com.sun.net.httpserver.HttpServer;
-
 import dev.portfolio.uptimemonitor.TestcontainersConfiguration;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
 import dev.portfolio.uptimemonitor.monitor.MonitorRepository;
 
-@SpringBootTest
+@SpringBootTest(properties = "uptime.scheduler.enabled=false")
 @AutoConfigureMockMvc
 @Import(TestcontainersConfiguration.class)
 class CheckRunApiTest {
