@@ -3,7 +3,7 @@ services:
     image: postgres:17
     environment:
       POSTGRES_USER: uptime
-      POSTGRES_PASSWORD: change-me
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is not set, copy .env.example to .env}
       POSTGRES_DB: uptime_monitor
     ports:
       - "5432:5432"
