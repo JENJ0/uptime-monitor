@@ -12,21 +12,12 @@ import java.net.UnknownHostException;
 @Service
 public class CheckService {
 
-    private static final String TARGET_URL = "http://localhost:8080/api/hello";
-    private static final int EXPECTED_STATUS = 200;
-
     private final RestClient restClient;
 
     public CheckService(RestClient restClient) {  
         this.restClient = restClient;
     }
-
-    public CheckResult runCheck() {
-       return runCheckAgainst(TARGET_URL);
-    }
-    public CheckResult runCheckAgainst(String targetUrl) {
-        return runCheckAgainst(targetUrl, EXPECTED_STATUS);
-    }
+    
     public CheckResult runCheckAgainst(String targetUrl, int expectedStatus) {
         Instant checkedAt = Instant.now();
         long startTime = System.nanoTime();

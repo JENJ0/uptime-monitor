@@ -47,7 +47,7 @@ class CheckServiceTest { // public not needed for JUnit 5
 
     @Test 
     void expectedStatusIsSuccessful() {
-        CheckResult result = checkService.runCheckAgainst(baseUrl + "/ok");
+        CheckResult result = checkService.runCheckAgainst(baseUrl + "/ok", 200);
         assertTrue(result.successful());
         assertEquals(200, result.httpStatus());
         assertNull(result.errorType());
@@ -55,7 +55,7 @@ class CheckServiceTest { // public not needed for JUnit 5
 
     @Test 
     void unexpectedStatusIsUnsuccessful() {
-        CheckResult result = checkService.runCheckAgainst(baseUrl + "/error");
+        CheckResult result = checkService.runCheckAgainst(baseUrl + "/error", 200);
         assertFalse(result.successful());
         assertEquals(500, result.httpStatus());
         assertEquals("UNEXPECTED_STATUS", result.errorType());
@@ -63,7 +63,7 @@ class CheckServiceTest { // public not needed for JUnit 5
 
     @Test
     void unreachableTargetIsConnectionRefused() {
-        CheckResult result = checkService.runCheckAgainst("http://localhost:1");
+        CheckResult result = checkService.runCheckAgainst("http://localhost:1", 200);
         assertFalse(result.successful());
         assertNull(result.httpStatus());
         assertEquals("CONNECTION_REFUSED", result.errorType());
@@ -71,7 +71,7 @@ class CheckServiceTest { // public not needed for JUnit 5
 
     @Test
     void slowTargetIsTimeout() {
-        CheckResult result = checkService.runCheckAgainst(baseUrl + "/slow");
+        CheckResult result = checkService.runCheckAgainst(baseUrl + "/slow", 200);
         assertFalse(result.successful());
         assertNull(result.httpStatus());
         assertEquals("TIMEOUT", result.errorType());
