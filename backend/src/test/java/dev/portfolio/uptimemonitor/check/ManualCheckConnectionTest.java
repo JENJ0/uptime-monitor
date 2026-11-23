@@ -30,7 +30,7 @@ import dev.portfolio.uptimemonitor.monitor.MonitorRepository;
     "uptime.scheduler.enabled=false",
     "spring.datasource.hikari.maximum-pool-size=1",
     "spring.datasource.hikari.connection-timeout=500"
-}) 
+})
 
 @AutoConfigureMockMvc
 @Import(TestcontainersConfiguration.class)
@@ -66,13 +66,14 @@ class ManualCheckConnectionTest {
         });
         server.start();
 
-        Monitor monitor = monitorRepository.save(new Monitor("Test", "http://localhost:" + server.getAddress().getPort() + "/held", 60, 2000, 200));
+        Monitor monitor = monitorRepository.save(
+            new Monitor("Test", "http://localhost:" + server.getAddress().getPort() + "/held", 60, 2000, 200));
         Future<Integer> status = executor.submit(() -> mockMvc
             .perform(MockMvcRequestBuilders.post("/api/monitors/" + monitor.getId() + "/checks"))
             .andReturn().getResponse().getStatus());
             
         assertTrue(arrived.await(5, TimeUnit.SECONDS));
-        try{
+        try {
             assertDoesNotThrow(() -> monitorRepository.count(), "The only pool connection is occupied!");
         } finally { 
             release.countDown();
