@@ -1,9 +1,7 @@
 package dev.portfolio.uptimemonitor.check;
 import org.springframework.stereotype.Service;
-import dev.portfolio.uptimemonitor.CheckService;
 import dev.portfolio.uptimemonitor.monitor.MonitorRepository;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
-import dev.portfolio.uptimemonitor.CheckResult;
 import dev.portfolio.uptimemonitor.monitor.MonitorNotFoundException;
 
 @Service

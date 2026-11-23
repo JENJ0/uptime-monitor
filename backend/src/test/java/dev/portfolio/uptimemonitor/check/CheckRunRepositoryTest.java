@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import dev.portfolio.uptimemonitor.CheckResult;
 import dev.portfolio.uptimemonitor.TestcontainersConfiguration;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
 import dev.portfolio.uptimemonitor.monitor.MonitorRepository;

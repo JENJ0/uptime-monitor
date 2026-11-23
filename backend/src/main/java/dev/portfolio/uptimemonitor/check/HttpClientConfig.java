@@ -1,4 +1,4 @@
-package dev.portfolio.uptimemonitor;
+package dev.portfolio.uptimemonitor.check;
 
 import java.time.Duration;
 

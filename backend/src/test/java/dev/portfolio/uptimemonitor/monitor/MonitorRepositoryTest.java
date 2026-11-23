@@ -1,5 +1,6 @@
 package dev.portfolio.uptimemonitor.monitor;
 
+import dev.portfolio.uptimemonitor.check.CheckResult;
 import dev.portfolio.uptimemonitor.check.CheckRun;
 import dev.portfolio.uptimemonitor.check.CheckRunRepository;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,6 @@ import java.time.Instant;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import dev.portfolio.uptimemonitor.CheckResult;
 
 @SpringBootTest(properties = "uptime.scheduler.enabled=false")
 @Import(TestcontainersConfiguration.class)

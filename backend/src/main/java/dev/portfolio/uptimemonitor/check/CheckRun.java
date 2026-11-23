@@ -8,7 +8,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.FetchType;
-import dev.portfolio.uptimemonitor.CheckResult;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
 import java.time.Instant;
 

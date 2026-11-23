@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.sun.net.httpserver.HttpServer;
 
-import dev.portfolio.uptimemonitor.CheckResult;
 import dev.portfolio.uptimemonitor.TestcontainersConfiguration;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
 import dev.portfolio.uptimemonitor.monitor.MonitorRepository;
