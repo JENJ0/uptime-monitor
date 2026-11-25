@@ -68,6 +68,29 @@ class CheckRunApiTest {
     }
 
     @Test
+    void checkUsesTheMonitorTimeout() throws Exception {
+        server = HttpServer.create(new InetSocketAddress("localhost", 0), 200);
+        server.createContext("/slow", exchange -> {
+            try {
+                Thread.sleep(1500);  // sleep for 1.5 seconds to simulate timeout
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            exchange.sendResponseHeaders(200, -1);
+            exchange.close();
+        });
+        server.start();
+        Monitor monitor = new Monitor("Test", "http://localhost:" + server.getAddress().getPort() + "/slow", 60, 500, 200);
+        monitor = monitorRepository.save(monitor);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/monitors/" + monitor.getId() + "/checks"))
+            .andExpect(MockMvcResultMatchers.status().isCreated())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.successful").value(false))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.errorType").value("TIMEOUT"));
+        
+    }
+
+    @Test
     void historyOfUnknownMonitorReturns404() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/monitors/999999/checks"))
             .andExpect(MockMvcResultMatchers.status().isNotFound())

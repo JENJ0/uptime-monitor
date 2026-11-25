@@ -1,6 +1,5 @@
 package dev.portfolio.uptimemonitor.check;
 
-import java.time.Duration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +11,9 @@ public class HttpClientConfig {
 
     @Bean
     RestClient restClient() {
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(Duration.ofSeconds(1));
-        requestFactory.setReadTimeout(Duration.ofSeconds(2));
-
+        // Timeouts are set for each check in CheckService, from the monitor's timeoutMs.
         return RestClient.builder()
-                .requestFactory(requestFactory)
+                .requestFactory(new SimpleClientHttpRequestFactory())
                 .build();
     }
 }

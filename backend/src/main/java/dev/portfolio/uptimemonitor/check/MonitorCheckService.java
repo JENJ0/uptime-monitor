@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import dev.portfolio.uptimemonitor.monitor.MonitorRepository;
 import dev.portfolio.uptimemonitor.monitor.Monitor;
 import dev.portfolio.uptimemonitor.monitor.MonitorNotFoundException;
+import java.time.Duration;
 
 @Service
 public class MonitorCheckService {
@@ -20,7 +21,8 @@ public class MonitorCheckService {
     public CheckRun runCheck(long monitorId) {
         Monitor monitor = monitorRepository.findById(monitorId)
         .orElseThrow(() -> new MonitorNotFoundException(monitorId));
-        CheckResult checkResult = checkService.runCheckAgainst(monitor.getUrl(), monitor.getExpectedStatus());
+        CheckResult checkResult = checkService.runCheckAgainst(
+            monitor.getUrl(), monitor.getExpectedStatus(), Duration.ofMillis(monitor.getTimeoutMs()));
         CheckRun checkRun = new CheckRun(monitor, checkResult);
         return checkRunRepository.save(checkRun);
     }
